@@ -2,7 +2,7 @@
 FROM maven as build
 WORKDIR /code
 COPY . /code/
-RUN --mount=type=cache,target=/root/.m2 mvn package
+RUN --mount=type=cache,target=/root/.m2 mvn package -DskipTests=true
 
 FROM openjdk:8-jre-alpine
 COPY --from=build /code/target/gateway-service-1.1.jar gateway-service-1.1.jar
